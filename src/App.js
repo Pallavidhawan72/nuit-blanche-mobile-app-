@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import { FaBars, FaUserCircle, FaChevronDown, FaChevronUp, FaRegSmile, FaRegLightbulb, FaRegHandPointUp, FaRegComments, FaRegClock } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
 import logo from './logo.svg';
+import EmotionExhibitsPage from './EmotionExhibitsPage';
 
 const steps = [
   { title: 'Choose Your Emotion', icon: <FaRegSmile /> },
@@ -98,7 +99,7 @@ function LoginModal({ open, onClose, onLogin, error }) {
     onLogin(email, password);
   };
   const bgStyle = {
-    backgroundImage: "url('/images/e576f3e0-109b-4893-873d-0052f464041f_1536x1024.jpg')",
+    backgroundImage: `url('${process.env.PUBLIC_URL}/images/e576f3e0-109b-4893-873d-0052f464041f_1536x1024.jpg')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -154,12 +155,12 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
           {!isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} style={{ opacity: 0.6 }} />}
         </div>
         <div className="welcome-section">
-          <div className="welcome-text">
-            <span>Welcome to</span>
-            <h1 className="nb-title">
-              NUIT BLANCHE<br />
-              <span className="toronto">TORONTO</span>
-            </h1>
+          <div className="landing-welcome-wrap">
+            <div className="welcome-text">Welcome to</div>
+            <div className="text-logo">
+              <div className="nb-logo-main">NUIT BLANCHE</div>
+              <div className="nb-logo-toronto">TORONTO</div>
+            </div>
           </div>
         </div>
         <div className="carousel advanced-carousel">
@@ -230,17 +231,18 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
 
 function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) {
   const emotions = [
-    { name: 'JOY', color: '#4fc3f7', img: '/images/joy.png' },
-    { name: 'CURIOUS', color: '#a084ca', img: '/images/curious.png' },
-    { name: 'INSPIRED', color: '#90caf9', img: '/images/inspired.png' },
-    { name: 'CALM', color: '#b2dfdb', img: '/images/calm.png' },
-    { name: 'AMAZED', color: '#b2ff59', img: '/images/amazed.png' },
-    { name: 'REBELLIOUS', color: '#ffb74d', img: '/images/rebellious.png' },
-    { name: 'SURPRISE ME', color: '#ffe082', img: '/images/suprise.png' },
+    { name: 'JOY', color: '#4fc3f7', img: process.env.PUBLIC_URL + '/images/joy.png' },
+    { name: 'CURIOUS', color: '#a084ca', img: process.env.PUBLIC_URL + '/images/curious.png' },
+    { name: 'INSPIRED', color: '#90caf9', img: process.env.PUBLIC_URL + '/images/inspired.png' },
+    { name: 'CALM', color: '#b2dfdb', img: process.env.PUBLIC_URL + '/images/calm.png' },
+    { name: 'AMAZED', color: '#b2ff59', img: process.env.PUBLIC_URL + '/images/amazed.png' },
+    { name: 'REBELLIOUS', color: '#ffb74d', img: process.env.PUBLIC_URL + '/images/rebellious.png' },
+    { name: 'SURPRISE ME', color: '#ffe082', img: process.env.PUBLIC_URL + '/images/suprise.png' },
   ];
   const [selected, setSelected] = useState(null);
   const [hasBand, setHasBand] = useState(null);
   const subtitle = 'Explore how you feel when you choose to go against the grain.';
+  const navigate = useNavigate();
   return (
     <div className="landing-bg">
       <div className="landing-container advanced emotion-select-page">
@@ -254,7 +256,7 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
         <div className="emotion-grid-bg">
           <div className="emotion-grid">
             <div className="emotion-row">
-              <div className="emotion-item" onClick={() => setSelected(0)} style={{ opacity: selected === 0 ? 1 : 0.85 }}>
+              <div className="emotion-item" onClick={() => navigate(`/emotion/JOY`)} style={{ opacity: selected === 0 ? 1 : 0.85 }}>
                 <img src={emotions[0].img} alt={emotions[0].name} className="emotion-img" />
                 <div className="emotion-pill" style={{ boxShadow: `0 4px 24px ${emotions[0].color}44` }}>
                   <span className="emotion-pill-icon">⭐</span>
@@ -265,7 +267,7 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
             </div>
             <div className="emotion-row">
               {[1,2].map(idx => (
-                <div className="emotion-item" key={idx} onClick={() => setSelected(idx)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
+                <div className="emotion-item" key={idx} onClick={() => navigate(`/emotion/${emotions[idx].name}`)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
                   <img src={emotions[idx].img} alt={emotions[idx].name} className="emotion-img" />
                   <div className="emotion-pill" style={{ boxShadow: `0 4px 24px ${emotions[idx].color}44` }}>
                     <span className="emotion-pill-icon">⭐</span>
@@ -277,7 +279,7 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
             </div>
             <div className="emotion-row">
               {[3,4].map(idx => (
-                <div className="emotion-item" key={idx} onClick={() => setSelected(idx)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
+                <div className="emotion-item" key={idx} onClick={() => navigate(`/emotion/${emotions[idx].name}`)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
                   <img src={emotions[idx].img} alt={emotions[idx].name} className="emotion-img" />
                   <div className="emotion-pill" style={{ boxShadow: `0 4px 24px ${emotions[idx].color}44` }}>
                     <span className="emotion-pill-icon">⭐</span>
@@ -289,7 +291,7 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
             </div>
             <div className="emotion-row">
               {[5,6].map(idx => (
-                <div className="emotion-item" key={idx} onClick={() => setSelected(idx)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
+                <div className="emotion-item" key={idx} onClick={() => navigate(`/emotion/${emotions[idx].name}`)} style={{ opacity: selected === idx ? 1 : 0.85 }}>
                   <img src={emotions[idx].img} alt={emotions[idx].name} className="emotion-img" />
                   <div className="emotion-pill" style={{ boxShadow: `0 4px 24px ${emotions[idx].color}44` }}>
                     <span className="emotion-pill-icon">⭐</span>
@@ -369,6 +371,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
           <Route path="/emotion" element={<EmotionSelectPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
+          <Route path="/emotion/:emotionName" element={<EmotionExhibitsPage theme={theme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
         </Routes>
       </Router>
     </div>

@@ -168,14 +168,65 @@ body, html, #root {
 }
 
 .welcome-section {
-  margin-top: 0.5rem;
+  padding-left: 0;
+  padding-top: 32px;
+  padding-bottom: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.landing-welcome-wrap {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  margin-left: 0;
+}
+.text-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+.text-logo .nb-logo-main {
+  font-size: 2.1rem;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0.2rem 0 0 0;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px #e100ff33;
+}
+.text-logo .nb-logo-toronto {
+  color: #00c3ff;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+}
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   margin-bottom: 0.5rem;
 }
-.welcome-text span {
+.welcome-to {
   font-size: 1.1rem;
-  color: #fff;
   font-weight: 500;
-  opacity: 0.85;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  letter-spacing: 0.01em;
+  display: block;
+  text-align: left;
+  line-height: 1.1;
+}
+.landing-nb-welcome-logo {
+  width: 420px;
+  max-width: 98vw;
+  height: auto;
+  display: block;
+  margin: 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 .nb-title {
   font-size: 2.1rem;
@@ -431,6 +482,25 @@ body, html, #root {
     bottom: auto;
     top: auto;
   }
+  .landing-nb-welcome-logo {
+    width: 98vw;
+    max-width: 99vw;
+  }
+  .welcome-section {
+    padding-left: 10px;
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+  .landing-welcome-wrap {
+    max-width: 98vw;
+  }
+  .welcome-to {
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+  }
+  .landing-nb-welcome-logo {
+    max-width: 98vw;
+  }
 }
 
 .emotion-select-page {
@@ -451,13 +521,15 @@ body, html, #root {
 .theme-dark .emotion-title,
 .theme-dark .emotion-progress-label,
 .theme-dark .emotion-band-label,
-.theme-dark .subtitle {
+.theme-dark .subtitle,
+.theme-dark .welcome-to {
   color: var(--color-text-dark);
 }
 .theme-light .emotion-title,
 .theme-light .emotion-progress-label,
 .theme-light .emotion-band-label,
-.theme-light .subtitle {
+.theme-light .subtitle,
+.theme-light .welcome-to {
   color: var(--color-text-light);
 }
 
@@ -570,28 +642,33 @@ body, html, #root {
 }
 
 @media (max-width: 600px) {
+  .emotion-grid {
+    width: 100%;
+    padding: 0;
+  }
   .emotion-row {
+    flex-direction: column;
+    gap: 0.5rem;
     margin-bottom: 0.2rem;
+    width: 100%;
+    align-items: center;
   }
   .emotion-item {
-    min-width: 90px;
-    min-height: 140px;
+    min-width: 80px;
+    min-height: 120px;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 220px;
   }
   .emotion-img {
-    width: 60px;
-    height: 60px;
+    width: 48px;
+    height: 48px;
   }
   .emotion-pill {
-    min-width: 100px;
+    min-width: 80px;
     max-width: 120px;
-    padding: 0.4rem 0.5rem 0.5rem 0.5rem;
-    margin-top: -12px;
-  }
-  .emotion-pill-title {
-    font-size: 1rem;
-  }
-  .emotion-pill-sub {
-    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+    margin-top: -10px;
   }
 }
 
@@ -766,7 +843,7 @@ body, html, #root {
 }
 
 /* Ensure all text uses theme variables */
-body, html, #root, .app-root {
+body, html, #root {
   background: none;
   color: inherit;
 }
@@ -1001,7 +1078,6 @@ body, html, #root, .app-root {
   padding: 0;
   overflow: hidden;
 }
-.login-modal::before {}
 .login-modal > * {
   position: relative;
   z-index: 1;
@@ -1158,4 +1234,250 @@ body, html, #root, .app-root {
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
 .nb-title {
   font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+/* Exhibits Page Styles */
+.exhibits-page-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+.theme-dark .exhibits-page-bg {
+  background: linear-gradient(135deg, var(--color-bg-dark) 0%, #2a225a 100%);
+}
+.theme-light .exhibits-page-bg {
+  background: linear-gradient(135deg, var(--color-bg-light) 0%, #e9eafc 100%);
+}
+
+.exhibits-container {
+  background: var(--color-card-dark);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px var(--color-shadow-dark);
+  padding: 36px 32px 32px 32px;
+  max-width: 420px;
+  width: 100%;
+  margin: 40px auto;
+  color: var(--color-text-dark);
+  position: relative;
+  z-index: 1;
+}
+.theme-light .exhibits-container {
+  background: var(--color-card-light);
+  color: var(--color-text-light);
+  box-shadow: 0 8px 32px var(--color-shadow-light);
+}
+
+.exhibits-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.exhibits-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+.exhibits-selected {
+  font-size: 1.05rem;
+  font-weight: 500;
+  margin-bottom: 0;
+  color: var(--color-accent-dark);
+}
+.theme-light .exhibits-selected {
+  color: var(--color-accent-light);
+}
+.exhibits-emotion {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--color-accent-dark);
+  border-radius: 8px;
+  padding: 2px 10px;
+  margin-left: 6px;
+}
+.theme-light .exhibits-emotion {
+  background: var(--color-accent-light);
+  color: #fff;
+}
+
+.exhibits-list-section {
+  margin-top: 18px;
+}
+.exhibits-list-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.08rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.exhibits-list-bold {
+  font-weight: 700;
+}
+
+.exhibits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.exhibit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-pill-dark);
+  border-radius: 12px;
+  padding: 14px 18px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  box-shadow: 0 2px 8px var(--color-shadow-dark);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+.theme-light .exhibit-row {
+  background: var(--color-pill-light);
+  color: var(--color-text-light);
+  box-shadow: 0 2px 8px var(--color-shadow-light);
+}
+.exhibit-name {
+  flex: 1;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.exhibit-radio {
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
+  cursor: pointer;
+  min-width: 32px;
+  min-height: 32px;
+  justify-content: center;
+}
+.exhibit-radio input[type="radio"] {
+  display: none;
+}
+.exhibit-radio-custom {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-accent-dark);
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+.theme-light .exhibit-radio-custom {
+  border: 2.5px solid var(--color-accent-light);
+}
+.exhibit-radio input[type="radio"]:checked + .exhibit-radio-custom::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--color-accent-dark);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.theme-light .exhibit-radio input[type="radio"]:checked + .exhibit-radio-custom::after {
+  background: var(--color-accent-light);
+}
+.exhibit-radio-custom::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  background: transparent;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: background 0.2s;
+}
+
+@media (max-width: 600px) {
+  .exhibits-container {
+    padding: 18px 6px 18px 6px;
+    max-width: 98vw;
+  }
+  .exhibits-title, .exhibits-selected, .exhibits-list-title, .exhibit-name {
+    font-size: 0.98rem;
+  }
+  .exhibit-row {
+    padding: 10px 8px;
+  }
+  .exhibit-radio-custom {
+    width: 20px;
+    height: 20px;
+  }
+  .exhibit-radio input[type="radio"]:checked + .exhibit-radio-custom::after {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.exhibits-welcome-section {
+  margin-top: 18px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+.welcome-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.nb-welcome-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 8px var(--color-shadow-dark);
+}
+.exhibits-welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.welcome-to {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #d3d3d3;
+  margin-bottom: 0px;
+  letter-spacing: 0.01em;
+}
+.exhibits-nb-title {
+  font-size: 2.1rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.1;
+  color: #fff;
+}
+.exhibits-toronto {
+  color: #00c3ff;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+@media (max-width: 600px) {
+  .nb-welcome-logo {
+    width: 44px;
+    height: 44px;
+  }
+  .exhibits-nb-title {
+    font-size: 1.2rem;
+  }
+  .exhibits-toronto {
+    font-size: 0.95rem;
+  }
+  .welcome-logo-row {
+    gap: 8px;
+  }
 }
