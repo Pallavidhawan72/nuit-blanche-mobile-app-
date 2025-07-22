@@ -64,11 +64,31 @@ function EmotionExhibitsPage({ theme, openSidebar, openProfile, isLoggedIn }) {
     'Exhibit 4',
     'Exhibit 5',
   ];
-  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [selectedExhibits, setSelectedExhibits] = useState([0, 1]); // demo: first two selected
   const [visited, setVisited] = useState([0, 1]); // demo: first two visited
 
+  // Define colors for each emotion
+  const emotionColors = {
+    'JOY': '#4fc3f7',
+    'CURIOUS': '#a084ca', 
+    'INSPIRED': '#90caf9',
+    'CALM': '#b2dfdb',
+    'AMAZED': '#b2ff59',
+    'REBELLIOUS': '#ffb74d',
+    'SURPRISE ME': '#ffe082',
+  };
+
+  const currentEmotionColor = emotionColors[emotionName?.toUpperCase()] || '#ffb74d';
+
   const handleSelect = idx => {
-    setSelectedIdx(idx);
+    if (selectedExhibits.includes(idx)) {
+      // Remove from selection if already selected
+      setSelectedExhibits(selectedExhibits.filter(i => i !== idx));
+    } else {
+      // Add to selection if not selected
+      setSelectedExhibits([...selectedExhibits, idx]);
+    }
+    
     if (!visited.includes(idx)) {
       setVisited([...visited, idx]);
     }
@@ -83,14 +103,23 @@ function EmotionExhibitsPage({ theme, openSidebar, openProfile, isLoggedIn }) {
           {isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} />}
           {!isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} style={{ opacity: 0.6 }} />}
         </div>
+        <div className="google-maps-section">
+          <img src={process.env.PUBLIC_URL + '/images/googlemaps.jpg'} alt="Google Maps" className="google-maps-image" />
+        </div>
         <div className="exhibits-container">
           <div className="exhibits-header">
             <div className="exhibits-title">Choose one of the EMOTION to begin.</div>
-            <div className="exhibits-selected">YOU'VE SELECTED <span className="exhibits-emotion">{emotionName?.toUpperCase()}</span></div>
+            <div className="exhibits-selected">YOU'VE SELECTED <span 
+              className="exhibits-emotion"
+              style={{
+                background: `linear-gradient(45deg, ${currentEmotionColor}, ${currentEmotionColor}dd)`,
+                boxShadow: `0 4px 12px ${currentEmotionColor}66`
+              }}
+            >{emotionName?.toUpperCase()}</span></div>
           </div>
           <div className="exhibits-list-section">
             <div className="exhibits-list-title">
-              <span className="exhibits-list-bold">5 EXHIBITS</span> <span className="exhibits-list-bold">{visited.length} VISITED OUT OF 5</span>
+              <span className="exhibits-list-bold">5 EXHIBITS</span> <span className="exhibits-list-bold">{selectedExhibits.length} SELECTED</span>
             </div>
             <div className="exhibits-list">
               {exhibits.map((ex, idx) => (
@@ -98,20 +127,21 @@ function EmotionExhibitsPage({ theme, openSidebar, openProfile, isLoggedIn }) {
                   className="exhibit-row"
                   key={ex}
                   onClick={() => handleSelect(idx)}
-                  role="radio"
-                  aria-checked={selectedIdx === idx}
+                  role="checkbox"
+                  aria-checked={selectedExhibits.includes(idx)}
                   tabIndex={0}
                   onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleSelect(idx); }}
                 >
                   <span className="exhibit-name">“{ex}”</span>
                   <span className="exhibit-radio">
-                    <input
-                      type="radio"
-                      name="exhibit"
-                      checked={selectedIdx === idx}
-                      onChange={() => handleSelect(idx)}
+                    <span 
+                      className={`exhibit-radio-custom ${selectedExhibits.includes(idx) ? 'selected' : ''}`}
+                      style={{
+                        borderColor: `${currentEmotionColor}cc`,
+                        boxShadow: selectedExhibits.includes(idx) ? `0 0 16px ${currentEmotionColor}66` : undefined,
+                        background: selectedExhibits.includes(idx) ? `linear-gradient(45deg, ${currentEmotionColor}, ${currentEmotionColor}dd)` : undefined
+                      }}
                     />
-                    <span className="exhibit-radio-custom" />
                   </span>
                 </div>
               ))}

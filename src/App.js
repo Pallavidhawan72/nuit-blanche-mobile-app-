@@ -99,7 +99,7 @@ function LoginModal({ open, onClose, onLogin, error }) {
     onLogin(email, password);
   };
   const bgStyle = {
-    backgroundImage: `url('${process.env.PUBLIC_URL}/images/e576f3e0-109b-4893-873d-0052f464041f_1536x1024.jpg')`,
+    backgroundImage: `url('${process.env.PUBLIC_URL}/images/starry-night-bg.jpg')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -244,8 +244,23 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
   const subtitle = 'Explore how you feel when you choose to go against the grain.';
   const navigate = useNavigate();
   return (
-    <div className="landing-bg">
-      <div className="landing-container advanced emotion-select-page">
+    <div className="landing-bg" style={{
+      backgroundImage: `url('${process.env.PUBLIC_URL}/images/starry-night-bg.jpg')`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative'
+    }}>
+      <div style={{ 
+        position: 'absolute', 
+        top: 0, 
+        left: 0, 
+        right: 0, 
+        bottom: 0, 
+        background: 'rgba(35,36,58,0.4)', 
+        zIndex: 0 
+      }} />
+      <div className="landing-container advanced emotion-select-page" style={{ position: 'relative', zIndex: 1 }}>
         <div className="top-bar">
           <FaBars className="icon" onClick={openSidebar} />
           <img src={logo} alt="Nuit Blanche Toronto" className="nb-logo" />
@@ -253,6 +268,24 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
           {!isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} style={{ opacity: 0.6 }} />}
         </div>
         <div className="emotion-title">Tonight I want to feel...</div>
+        <div className="emotion-band-section">
+          <div className="emotion-band-label">Do you have a Spectrum Band ?</div>
+          <div className="emotion-band-options">
+            <label className={`emotion-band-radio${hasBand === true ? ' selected' : ''}`}>
+              <input type="radio" name="band" checked={hasBand === true} onChange={() => setHasBand(true)} /> Yes
+            </label>
+            <label className={`emotion-band-radio${hasBand === false ? ' selected' : ''}`}>
+              <input type="radio" name="band" checked={hasBand === false} onChange={() => setHasBand(false)} /> No
+            </label>
+          </div>
+          <div className="band-image-container">
+            <img src={process.env.PUBLIC_URL + '/images/band.png'} alt="Spectrum Band" className="band-image" />
+          </div>
+        </div>
+        <div className="section-separator">
+          <div className="separator-line"></div>
+          <div className="separator-line"></div>
+        </div>
         <div className="emotion-grid-bg">
           <div className="emotion-grid">
             <div className="emotion-row">
@@ -309,19 +342,6 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
             <div className="emotion-progress-dot" style={{ left: selected !== null ? `${(selected/6)*100}%` : '0%' }} />
             <div className="emotion-progress-track" />
           </div>
-        </div>
-        <div className="emotion-band-section">
-          <hr className="emotion-divider" />
-          <div className="emotion-band-label">Do you have a Spectrum Band ?</div>
-          <div className="emotion-band-options">
-            <label className={`emotion-band-radio${hasBand === true ? ' selected' : ''}`}>
-              <input type="radio" name="band" checked={hasBand === true} onChange={() => setHasBand(true)} /> Yes
-            </label>
-            <label className={`emotion-band-radio${hasBand === false ? ' selected' : ''}`}>
-              <input type="radio" name="band" checked={hasBand === false} onChange={() => setHasBand(false)} /> No
-            </label>
-          </div>
-          <input className="emotion-band-input" placeholder="Enter Band Code" />
         </div>
       </div>
     </div>
