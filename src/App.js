@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import { FaBars, FaUserCircle, FaChevronDown, FaChevronUp, FaRegSmile, FaRegLightbulb, FaRegHandPointUp, FaRegComments, FaRegClock } from 'react-icons/fa';
+import { FaBars, FaChevronDown, FaChevronUp, FaRegSmile, FaRegLightbulb, FaRegHandPointUp, FaRegComments, FaRegClock, FaUserCircle, FaArrowLeft, FaArrowRight, FaHome } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
@@ -9,12 +9,154 @@ import EmotionExhibitsPage from './EmotionExhibitsPage';
 import ShareThoughtsPage from './ShareThoughtsPage';
 
 const steps = [
-  { title: 'Choose Your Emotion', icon: <FaRegSmile /> },
-  { title: 'Get Your Glowing Band', icon: <FaRegLightbulb /> },
-  { title: 'Tap to Share Feelings', icon: <FaRegHandPointUp /> },
-  { title: 'Connect & Explore', icon: <FaRegComments /> },
-  { title: 'Relive the Night', icon: <FaRegClock /> },
+  { 
+    title: 'Choose Your Emotion', 
+    icon: <FaRegSmile />, 
+    content: 'Details about "Choose Your Emotion" will go here.' 
+  },
+  { 
+    title: 'Get Your Glowing Band', 
+    icon: <FaRegLightbulb />, 
+    content: 'Receive your personalized glowing wristband that connects to your chosen emotion.' 
+  },
+  { 
+    title: 'Tap to Share Feelings', 
+    icon: <FaRegHandPointUp />, 
+    content: 'Share your emotional experience by tapping your band with others.' 
+  },
+  { 
+    title: 'Connect & Explore', 
+    icon: <FaRegComments />, 
+    content: 'Discover art installations and connect with people who share similar emotions.' 
+  },
+  { 
+    title: 'Relive the Night', 
+    icon: <FaRegClock />, 
+    content: 'Review your journey and connections made throughout the night.' 
+  },
 ];
+
+function BottomNavigation({ onBack, onHome, onNext, showBack = true, showNext = true }) {
+  return (
+    <div style={{
+      position: 'fixed',
+      bottom: '0',
+      left: '0',
+      right: '0',
+      background: 'rgba(44, 44, 66, 0.95)',
+      backdropFilter: 'blur(15px)',
+      borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+      padding: '1rem 2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      zIndex: 1000,
+      boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.3)'
+    }}>
+      {/* Back Button */}
+      {showBack ? (
+        <button
+          onClick={() => {
+            console.log('Back button clicked');
+            onBack && onBack();
+          }}
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '50%',
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            color: '#ffffff'
+          }}
+          onMouseOver={e => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.transform = 'scale(1.1)';
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <FaArrowLeft size={18} />
+        </button>
+      ) : (
+        <div style={{ width: '48px' }}></div>
+      )}
+
+      {/* Home Button */}
+      <button
+        onClick={() => {
+          console.log('Home button clicked');
+          onHome && onHome();
+        }}
+        style={{
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          border: 'none',
+          borderRadius: '50%',
+          width: '56px',
+          height: '56px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          transition: 'all 0.3s ease',
+          color: '#ffffff',
+          boxShadow: '0 4px 16px rgba(102, 126, 234, 0.4)'
+        }}
+        onMouseOver={e => {
+          e.currentTarget.style.transform = 'scale(1.1)';
+          e.currentTarget.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.6)';
+        }}
+        onMouseOut={e => {
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.boxShadow = '0 4px 16px rgba(102, 126, 234, 0.4)';
+        }}
+      >
+        <FaHome size={20} />
+      </button>
+
+      {/* Next Button */}
+      {showNext ? (
+        <button
+          onClick={() => {
+            console.log('Next button clicked');
+            onNext && onNext();
+          }}
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            borderRadius: '50%',
+            width: '48px',
+            height: '48px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+            color: '#ffffff'
+          }}
+          onMouseOver={e => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.2)';
+            e.currentTarget.style.transform = 'scale(1.1)';
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.background = 'rgba(255, 255, 255, 0.1)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
+        >
+          <FaArrowRight size={18} />
+        </button>
+      ) : (
+        <div style={{ width: '48px' }}></div>
+      )}
+    </div>
+  );
+}
 
 const carouselImages = [
   {
@@ -139,9 +281,109 @@ function LoginModal({ open, onClose, onLogin, error }) {
   ) : null;
 }
 
-function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) {
+function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn, handleLogout }) {
   const [openStep, setOpenStep] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    handleLogout();
+    setProfileOpen(false);
+  };
+
+  function ProfileDropdown({ open, onClose, onLogout, theme }) {
+    const isDark = theme === 'dark';
+    return (
+      <>
+        {open && (
+          <div 
+            className="profile-dropdown"
+            style={{
+              position: 'absolute',
+              top: '60px',
+              right: '0px',
+              background: isDark ? 'rgba(30, 32, 54, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+              borderRadius: '0.8rem',
+              padding: '1rem',
+              minWidth: '180px',
+              boxShadow: isDark 
+                ? '0 8px 24px rgba(0, 0, 0, 0.4)' 
+                : '0 8px 24px rgba(0, 0, 0, 0.15)',
+              border: isDark 
+                ? '1px solid rgba(255, 255, 255, 0.1)' 
+                : '1px solid rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(10px)',
+              zIndex: 1000
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: '1rem'
+            }}>
+              <FaUserCircle size={40} style={{ 
+                color: '#00c3ff', 
+                marginBottom: '0.5rem' 
+              }} />
+              <span style={{ 
+                color: isDark ? '#fff' : '#333', 
+                fontSize: '0.9rem', 
+                fontWeight: '500',
+                textShadow: isDark 
+                  ? '0 1px 4px rgba(0, 0, 0, 0.5)' 
+                  : '0 1px 2px rgba(0, 0, 0, 0.1)'
+              }}>
+                User Profile
+              </span>
+            </div>
+            <button
+              onClick={onLogout}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                background: 'linear-gradient(90deg, #e100ff, #c640d8)',
+                border: 'none',
+                borderRadius: '0.5rem',
+                color: '#fff',
+                fontSize: '0.9rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 2px 8px rgba(225, 0, 255, 0.3)',
+                textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)'
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #ff20ff, #e055ff)';
+                e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #e100ff, #c640d8)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        )}
+        {open && (
+          <div 
+            className="profile-overlay"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'transparent',
+              zIndex: 999
+            }}
+            onClick={onClose}
+          />
+        )}
+      </>
+    );
+  }
   // Example icons for steps
   const stepIcons = [
     <FaRegSmile />, <FaRegLightbulb />, <FaRegHandPointUp />, <FaRegComments />, <FaRegClock />
@@ -149,11 +391,30 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
   return (
     <div className="landing-bg">
       <div className="landing-container advanced">
-        <div className="top-bar">
-          <FaBars className="icon" onClick={openSidebar} />
+        <div className="top-bar" style={{ position: 'relative' }}>
+          <FaBars 
+            className="icon" 
+            onClick={openSidebar}
+            style={{ color: theme === 'light' ? '#333' : '#fff' }}
+          />
           <img src={logo} alt="Nuit Blanche Toronto" className="nb-logo" />
-          {isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} />}
-          {!isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} style={{ opacity: 0.6 }} />}
+          <div style={{ position: 'relative' }}>
+            <FaUserCircle 
+              className="icon" 
+              style={{ 
+                opacity: 0.6,
+                cursor: 'pointer',
+                color: theme === 'light' ? '#333' : '#fff'
+              }}
+              onClick={() => setProfileOpen(!profileOpen)}
+            />
+            <ProfileDropdown 
+              open={profileOpen} 
+              onClose={() => setProfileOpen(false)}
+              onLogout={handleLogoutClick}
+              theme={theme}
+            />
+          </div>
         </div>
         <div className="welcome-section">
           <div className="landing-welcome-wrap">
@@ -164,8 +425,21 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
             </div>
           </div>
         </div>
-        <div className="carousel advanced-carousel">
-          <div className="carousel-animated-gradient" />
+        <div className="carousel advanced-carousel" style={{
+          margin: '2rem 0',
+          borderRadius: '1.2rem',
+          overflow: 'hidden',
+          boxShadow: '0 8px 32px rgba(225, 0, 255, 0.3)',
+          position: 'relative',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
+        }}>
+          <div className="carousel-animated-gradient" style={{
+            position: 'absolute',
+            top: 0, left: 0, right: 0, bottom: 0,
+            background: 'linear-gradient(45deg, rgba(0, 195, 255, 0.1), rgba(225, 0, 255, 0.1))',
+            zIndex: 1,
+            pointerEvents: 'none'
+          }} />
           <Carousel
             showThumbs={false}
             showStatus={false}
@@ -179,44 +453,262 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
                 className={`dot${isSelected ? ' active' : ''}`}
                 onClick={onClickHandler}
                 aria-label={`${label} ${index + 1}`}
+                style={{
+                  background: isSelected ? 'linear-gradient(90deg, #00eaff, #4fc3f7)' : 'rgba(255, 255, 255, 0.4)',
+                  width: '10px',
+                  height: '10px',
+                  borderRadius: '50%',
+                  display: 'inline-block',
+                  margin: '0 4px',
+                  cursor: 'pointer',
+                  transition: 'all 0.4s ease',
+                  boxShadow: isSelected ? '0 0 12px rgba(0, 234, 255, 0.6)' : 'none',
+                  transform: isSelected ? 'scale(1.2)' : 'scale(1)'
+                }}
               />
             )}
           >
             {carouselImages.map((img, idx) => (
-              <div key={idx} className="carousel-img-wrapper">
-                <img src={img.src} alt={img.alt} className="carousel-img" />
-                <div className="carousel-gradient" />
+              <div key={idx} className="carousel-img-wrapper" style={{ position: 'relative' }}>
+                <img 
+                  src={img.src} 
+                  alt={img.alt} 
+                  className="carousel-img" 
+                  style={{
+                    width: '100%',
+                    height: '220px',
+                    objectFit: 'cover',
+                    filter: 'brightness(0.8) contrast(1.2) saturate(1.1)'
+                  }}
+                />
+                <div className="carousel-gradient" style={{
+                  position: 'absolute',
+                  left: 0, right: 0, bottom: 0, top: 0,
+                  background: 'linear-gradient(180deg, rgba(30, 32, 54, 0.2) 0%, rgba(225, 0, 255, 0.3) 100%)',
+                  zIndex: 2
+                }} />
+                <div style={{
+                  position: 'absolute',
+                  bottom: '1rem',
+                  left: '1rem',
+                  color: '#fff',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  textShadow: '0 2px 8px rgba(0, 0, 0, 0.8)',
+                  zIndex: 3
+                }}>
+                  {img.alt}
+                </div>
               </div>
             ))}
           </Carousel>
         </div>
-        <div className="subtitle">Find your journey with Emotion Spectrum</div>
-        <button className="start-btn advanced-btn" onClick={() => navigate('/emotion')}>START NOW</button>
-        <div className="how-it-works">
-          <h2>HOW IT WORKS</h2>
-          <div className="steps">
+        <div className="subtitle" style={{
+          fontSize: '1.1rem',
+          fontWeight: '600',
+          color: theme === 'light' ? '#333' : '#fff',
+          textAlign: 'center',
+          margin: '1.5rem 0',
+          textShadow: theme === 'light' 
+            ? '0 1px 3px rgba(0, 0, 0, 0.2)' 
+            : '0 2px 8px rgba(0, 0, 0, 0.6)',
+          opacity: 0.95,
+          lineHeight: '1.4'
+        }}>
+          Discover Toronto's art installations and connect through emotions
+        </div>
+        <div style={{
+          textAlign: 'center',
+          color: theme === 'light' ? '#00a3d9' : '#00c3ff',
+          fontSize: '0.95rem',
+          fontWeight: '500',
+          margin: '0.5rem 0 2rem 0',
+          opacity: 0.9,
+          textShadow: theme === 'light'
+            ? '0 1px 3px rgba(0, 163, 217, 0.3)'
+            : '0 2px 8px rgba(0, 195, 255, 0.4)'
+        }}>
+          Experience Nuit Blanche like never before
+        </div>
+        <button 
+          className="start-btn advanced-btn" 
+          onClick={() => navigate('/emotion')}
+          style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            border: 'none',
+            borderRadius: '50px',
+            padding: '1.2rem 3rem',
+            fontSize: '1.2rem',
+            fontWeight: '800',
+            color: '#fff',
+            cursor: 'pointer',
+            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            boxShadow: '0 8px 32px rgba(102, 126, 234, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1)',
+            textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            margin: '1.5rem 0',
+            position: 'relative',
+            overflow: 'hidden',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid rgba(255, 255, 255, 0.1)'
+          }}
+          onMouseOver={e => {
+            e.currentTarget.style.transform = 'translateY(-4px) scale(1.08)';
+            e.currentTarget.style.boxShadow = '0 16px 48px rgba(102, 126, 234, 0.6), 0 8px 24px rgba(118, 75, 162, 0.3)';
+            e.currentTarget.style.background = 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)';
+            e.currentTarget.style.filter = 'brightness(1.1) saturate(1.2)';
+          }}
+          onMouseOut={e => {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 8px 32px rgba(102, 126, 234, 0.4), 0 2px 8px rgba(0, 0, 0, 0.1)';
+            e.currentTarget.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            e.currentTarget.style.filter = 'brightness(1) saturate(1)';
+          }}
+          onMouseDown={e => {
+            e.currentTarget.style.transform = 'translateY(-2px) scale(1.05)';
+          }}
+        >
+          <span style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}>
+            ✨ START YOUR JOURNEY
+          </span>
+        </button>
+        <div className="how-it-works" style={{
+          marginTop: '2rem',
+          marginBottom: '1.5rem',
+          padding: '1.5rem',
+          background: 'rgba(44, 44, 66, 0.95)',
+          borderRadius: '1.2rem',
+          backdropFilter: 'blur(15px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)',
+          width: '100%',
+          maxWidth: '400px',
+          margin: '2rem auto 1.5rem auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <h2 style={{
+            fontSize: '1.8rem',
+            fontWeight: '800',
+            color: '#ffffff',
+            textAlign: 'center',
+            margin: '0 0 1.5rem 0',
+            textShadow: '0 2px 8px rgba(0, 0, 0, 0.7)',
+            letterSpacing: '0.02em',
+            lineHeight: '1.2',
+            width: '100%'
+          }}>HOW IT<br/>WORKS</h2>
+          <div className="steps" style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.8rem',
+            width: '100%',
+            alignItems: 'center'
+          }}>
             {steps.map((step, idx) => (
-              <div key={idx} className={`step${openStep === idx ? ' open' : ''}`}> 
+              <div 
+                key={idx} 
+                className={`step${openStep === idx ? ' open' : ''}`}
+                style={{
+                  background: 'rgba(70, 70, 90, 0.8)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: '1rem',
+                  transition: 'all 0.3s ease',
+                  overflow: 'hidden',
+                  backdropFilter: 'blur(10px)',
+                  width: '100%',
+                  maxWidth: '350px',
+                  marginBottom: '0.8rem',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.3)',
+                  alignSelf: 'center'
+                }}
+              > 
                 <div
                   className="step-header"
                   onClick={() => setOpenStep(openStep === idx ? null : idx)}
                   tabIndex={0}
                   role="button"
                   aria-expanded={openStep === idx}
+                  style={{
+                    padding: '1.2rem 1.4rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.parentElement.style.background = 'rgba(80, 80, 100, 0.9)';
+                    e.currentTarget.parentElement.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.parentElement.style.background = 'rgba(70, 70, 90, 0.8)';
+                    e.currentTarget.parentElement.style.transform = 'translateY(0)';
+                  }}
                 >
-                  <span className="step-title">{stepIcons[idx]} {step.title}</span>
+                  <span className="step-title" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    fontSize: '1.05rem',
+                    fontWeight: '600',
+                    color: '#ffffff',
+                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.6)',
+                    flex: 1
+                  }}>
+                    <span style={{ 
+                      color: '#00c3ff', 
+                      fontSize: '1.3rem',
+                      minWidth: '24px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>{stepIcons[idx]}</span>
+                    {step.title}
+                  </span>
                   {openStep === idx ? (
-                    <FaChevronUp className="chevron" />
+                    <FaChevronUp className="chevron" style={{ 
+                      color: '#00c3ff', 
+                      fontSize: '1.1rem',
+                      transition: 'all 0.2s ease'
+                    }} />
                   ) : (
-                    <FaChevronDown className="chevron" />
+                    <FaChevronDown className="chevron" style={{ 
+                      color: '#00c3ff', 
+                      fontSize: '1.1rem',
+                      transition: 'all 0.2s ease'
+                    }} />
                   )}
                 </div>
                 <div
                   className="step-content"
-                  style={{ maxHeight: openStep === idx ? '120px' : '0', opacity: openStep === idx ? 1 : 0 }}
+                  style={{ 
+                    maxHeight: openStep === idx ? '150px' : '0', 
+                    opacity: openStep === idx ? 1 : 0,
+                    transition: 'all 0.4s ease',
+                    overflow: 'hidden',
+                    background: 'rgba(50, 50, 70, 0.6)',
+                    borderTop: openStep === idx ? '1px solid rgba(255, 255, 255, 0.1)' : 'none'
+                  }}
                 >
                   {openStep === idx && (
-                    <p>Details about "{step.title}" will go here.</p>
+                    <p style={{
+                      padding: '1.2rem 1.4rem',
+                      margin: 0,
+                      color: '#ffffff',
+                      opacity: 0.85,
+                      fontSize: '0.95rem',
+                      lineHeight: '1.6',
+                      textShadow: '0 1px 3px rgba(0, 0, 0, 0.6)'
+                    }}>
+                      {step.content}
+                    </p>
                   )}
                 </div>
               </div>
@@ -224,13 +716,26 @@ function LandingPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) 
           </div>
         </div>
       </div>
-      <div className="bg-shape bg-shape1"></div>
-      <div className="bg-shape bg-shape2"></div>
+      <BottomNavigation 
+        onBack={() => {
+          console.log('Back clicked on landing page');
+          window.history.back();
+        }}
+        onHome={() => {
+          console.log('Home clicked on landing page');
+          navigate('/');
+        }}
+        onNext={() => {
+          console.log('Next clicked on landing page');
+          navigate('/emotion');
+        }}
+        showBack={false}
+      />
     </div>
   );
 }
 
-function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn }) {
+function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLoggedIn, handleLogout }) {
   const emotions = [
     { name: 'JOY', color: '#4fc3f7', img: process.env.PUBLIC_URL + '/images/joy.png' },
     { name: 'CURIOUS', color: '#a084ca', img: process.env.PUBLIC_URL + '/images/curious.png' },
@@ -242,8 +747,108 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
   ];
   const [selected, setSelected] = useState(null);
   const [hasBand, setHasBand] = useState(null);
+  const [profileOpen, setProfileOpen] = useState(false);
   const subtitle = 'Explore how you feel when you choose to go against the grain.';
   const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    handleLogout();
+    setProfileOpen(false);
+  };
+
+  function ProfileDropdown({ open, onClose, onLogout, theme }) {
+    const isDark = theme === 'dark';
+    return (
+      <>
+        {open && (
+          <div 
+            className="profile-dropdown"
+            style={{
+              position: 'absolute',
+              top: '60px',
+              right: '0px',
+              background: isDark ? 'rgba(30, 32, 54, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+              borderRadius: '0.8rem',
+              padding: '1rem',
+              minWidth: '180px',
+              boxShadow: isDark 
+                ? '0 8px 24px rgba(0, 0, 0, 0.4)' 
+                : '0 8px 24px rgba(0, 0, 0, 0.15)',
+              border: isDark 
+                ? '1px solid rgba(255, 255, 255, 0.1)' 
+                : '1px solid rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(10px)',
+              zIndex: 1000
+            }}
+          >
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: '1rem'
+            }}>
+              <FaUserCircle size={40} style={{ 
+                color: '#00c3ff', 
+                marginBottom: '0.5rem' 
+              }} />
+              <span style={{ 
+                color: isDark ? '#fff' : '#333', 
+                fontSize: '0.9rem', 
+                fontWeight: '500',
+                textShadow: isDark 
+                  ? '0 1px 4px rgba(0, 0, 0, 0.5)' 
+                  : '0 1px 2px rgba(0, 0, 0, 0.1)'
+              }}>
+                User Profile
+              </span>
+            </div>
+            <button
+              onClick={onLogout}
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                background: 'linear-gradient(90deg, #e100ff, #c640d8)',
+                border: 'none',
+                borderRadius: '0.5rem',
+                color: '#fff',
+                fontSize: '0.9rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                boxShadow: '0 2px 8px rgba(225, 0, 255, 0.3)',
+                textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)'
+              }}
+              onMouseOver={e => {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #ff20ff, #e055ff)';
+                e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseOut={e => {
+                e.currentTarget.style.background = 'linear-gradient(90deg, #e100ff, #c640d8)';
+                e.currentTarget.style.transform = 'scale(1)';
+              }}
+            >
+              Logout
+            </button>
+          </div>
+        )}
+        {open && (
+          <div 
+            className="profile-overlay"
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'transparent',
+              zIndex: 999
+            }}
+            onClick={onClose}
+          />
+        )}
+      </>
+    );
+  }
   return (
     <div className="landing-bg" style={{
       backgroundImage: `url('${process.env.PUBLIC_URL}/images/starry-night-bg.jpg')`,
@@ -262,11 +867,30 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
         zIndex: 0 
       }} />
       <div className="landing-container advanced emotion-select-page" style={{ position: 'relative', zIndex: 1 }}>
-        <div className="top-bar">
-          <FaBars className="icon" onClick={openSidebar} />
+        <div className="top-bar" style={{ position: 'relative' }}>
+          <FaBars 
+            className="icon" 
+            onClick={openSidebar}
+            style={{ color: theme === 'light' ? '#333' : '#fff' }}
+          />
           <img src={logo} alt="Nuit Blanche Toronto" className="nb-logo" />
-          {isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} />}
-          {!isLoggedIn && <FaUserCircle className="icon" onClick={openProfile} style={{ opacity: 0.6 }} />}
+          <div style={{ position: 'relative' }}>
+            <FaUserCircle 
+              className="icon" 
+              style={{ 
+                opacity: 0.6,
+                cursor: 'pointer',
+                color: theme === 'light' ? '#333' : '#fff'
+              }}
+              onClick={() => setProfileOpen(!profileOpen)}
+            />
+            <ProfileDropdown 
+              open={profileOpen} 
+              onClose={() => setProfileOpen(false)}
+              onLogout={handleLogoutClick}
+              theme={theme}
+            />
+          </div>
         </div>
         <div className="emotion-title">Tonight I want to feel...</div>
         <div className="emotion-band-section">
@@ -345,6 +969,17 @@ function EmotionSelectPage({ theme, setTheme, openSidebar, openProfile, isLogged
           </div>
         </div>
       </div>
+      <BottomNavigation 
+        onBack={() => navigate('/')}
+        onHome={() => navigate('/')}
+        onNext={() => {
+          if (selected !== null) {
+            const emotionName = emotions[selected].name.toLowerCase().replace(' ', '-');
+            navigate(`/emotion/${emotionName}`);
+          }
+        }}
+        showNext={selected !== null}
+      />
     </div>
   );
 }
@@ -390,8 +1025,8 @@ function App() {
       <ProfileDrawer open={profileOpen} onClose={() => setProfileOpen(false)} name={name} setName={setName} email={email} setEmail={setEmail} onLogout={handleLogout} />
       <Router>
         <Routes>
-          <Route path="/" element={<LandingPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
-          <Route path="/emotion" element={<EmotionSelectPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
+          <Route path="/" element={<LandingPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />} />
+          <Route path="/emotion" element={<EmotionSelectPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />} />
           <Route path="/emotion/:emotionName" element={<EmotionExhibitsPage theme={theme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
           <Route path="/share-thoughts" element={<ShareThoughtsPage theme={theme} setTheme={setTheme} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />} />
         </Routes>

@@ -81,29 +81,96 @@ function ShareThoughts({ theme }) {
     document.getElementById('thoughtInput')?.style.setProperty('--bubble-color', colorMap[emotion]);
   }, [emotion]);
 
-    // Match EmotionExhibitsPage SURPRISE background
-    const surpriseBg = {
-      background: "linear-gradient(135deg, #ffe082 0%, #fffde7 100%)",
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    };
-    return (
-      <div className="share-thoughts-center" style={surpriseBg}>
-  <div className={`app-container ${theme}`} style={{ borderRadius: 0 }}> 
-      <div id="title">
-        <h1>HI GEN/AVATAR</h1>
-  <img src={process.env.PUBLIC_URL + '/images/svg/Slider/Group 57.svg'} alt="Avatar" className="avatar-image" />
+  return (
+    <div className="share-thoughts-content">
+      <div className="share-title" style={{
+        textAlign: 'center',
+        marginBottom: '1.5rem'
+      }}>
+        <div className="text-logo" style={{ margin: '0 0 1rem 0' }}>
+          <div style={{
+            fontSize: '1.8rem',
+            fontWeight: '800',
+            color: theme === 'light' ? '#333' : '#fff',
+            letterSpacing: '0.1em',
+            textShadow: theme === 'light'
+              ? '0 2px 6px rgba(0, 0, 0, 0.2)'
+              : '0 2px 8px #0008',
+            margin: '0 0 0.2rem 0'
+          }}>NUIT BLANCHE</div>
+          <div style={{
+            fontSize: '1rem',
+            fontWeight: '700',
+            color: '#00c3ff',
+            letterSpacing: '0.15em',
+            textShadow: '0 2px 8px #00c3ff44'
+          }}>TORONTO</div>
+        </div>
+        <h1 style={{
+          fontSize: '1.5rem',
+          fontWeight: '700',
+          color: theme === 'light' ? '#333' : '#fff',
+          margin: '0 0 0.5rem 0',
+          textShadow: theme === 'light'
+            ? '0 2px 6px rgba(0, 0, 0, 0.2)'
+            : '0 2px 8px #0008'
+        }}>HI GEN/AVATAR</h1>
+        <img 
+          src={process.env.PUBLIC_URL + '/images/svg/Slider/Group 57.svg'} 
+          alt="Avatar" 
+          style={{
+            width: '60px',
+            height: '60px',
+            borderRadius: '50%',
+            margin: '0.5rem 0'
+          }}
+        />
       </div>
-      <h2>Share your thoughts</h2>
-      <div className="input-box">
+      
+      <div className="inspiration-text" style={{
+        textAlign: 'center',
+        color: theme === 'light' ? '#666' : '#fff',
+        fontSize: '1rem',
+        fontWeight: '500',
+        margin: '1rem 0',
+        opacity: 0.9,
+        textShadow: theme === 'light'
+          ? '0 1px 3px rgba(0, 0, 0, 0.2)'
+          : '0 2px 8px #0008'
+      }}>
+        Share your thoughts about tonight's art experiences
+      </div>
+
+          <h2 style={{
+            fontSize: '1.2rem',
+            fontWeight: '600',
+            color: theme === 'light' ? '#333' : '#fff',
+            textAlign: 'center',
+            margin: '0 0 1.5rem 0',
+            textShadow: theme === 'light'
+              ? '0 2px 6px rgba(0, 0, 0, 0.2)'
+              : '0 2px 8px #0008'
+          }}>Share your thoughts</h2>
+      <div className="input-section" style={{
+        marginBottom: '1.5rem'
+      }}>
         <input
           type="text"
           id="nameInput"
           placeholder="Your name (optional)"
           value={nameInput}
           onChange={e => setNameInput(e.target.value)}
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            borderRadius: '0.5rem',
+            border: `1px solid ${theme === 'light' ? '#ccc' : '#5b5ba6'}`,
+            background: theme === 'light' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.1)',
+            color: theme === 'light' ? '#333' : '#fff',
+            fontSize: '1rem',
+            marginBottom: '1rem',
+            boxSizing: 'border-box'
+          }}
         />
         <div className="chat-bubble-input">
           <textarea
@@ -111,13 +178,43 @@ function ShareThoughts({ theme }) {
             placeholder="Type your thought here..."
             value={thoughtInput}
             onChange={e => setThoughtInput(e.target.value)}
-            style={{ '--bubble-color': colorMap[emotion] }}
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #5b5ba6',
+              background: colorMap[emotion] || 'rgba(255, 255, 255, 0.1)',
+              color: '#333',
+              fontSize: '1rem',
+              minHeight: '100px',
+              resize: 'vertical',
+              boxSizing: 'border-box'
+            }}
           />
         </div>
-        <div className="form-row">
-          <select id="emotionSelect" value={emotion} onChange={handleEmotionChange}>
+        <div className="form-controls" style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          flexWrap: 'wrap',
+          marginTop: '1rem'
+        }}>
+          <select 
+            id="emotionSelect" 
+            value={emotion} 
+            onChange={handleEmotionChange}
+            style={{
+              padding: '0.5rem',
+              borderRadius: '0.5rem',
+              border: '1px solid #5b5ba6',
+              background: 'rgba(255, 255, 255, 0.1)',
+              color: '#fff',
+              fontSize: '0.9rem',
+              flex: 1
+            }}
+          >
             {emotionOptions.map(opt => (
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
+              <option key={opt.value} value={opt.value} style={{ background: '#23243a', color: '#fff' }}>{opt.label}</option>
             ))}
           </select>
           <button
@@ -125,35 +222,138 @@ function ShareThoughts({ theme }) {
             className={likeCount > 0 ? 'liked' : ''}
             type="button"
             onClick={handleLikeToggle}
+            style={{
+              padding: '0.5rem 0.75rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              background: likeCount > 0 ? '#ff4757' : 'rgba(255, 255, 255, 0.1)',
+              color: '#fff',
+              fontSize: '0.9rem',
+              cursor: 'pointer',
+              transition: 'background 0.2s'
+            }}
           >
             ❤️ {likeCount}
           </button>
-          <button type="button" onClick={handleSubmit}>Submit</button>
+          <button 
+            type="button" 
+            onClick={handleSubmit}
+            style={{
+              padding: '0.5rem 1rem',
+              borderRadius: '0.5rem',
+              border: 'none',
+              background: 'linear-gradient(90deg, #00c3ff, #4fc3f7)',
+              color: '#fff',
+              fontSize: '0.9rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              boxShadow: '0 2px 12px #00c3ff44',
+              textShadow: '0 1px 4px #0008'
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.transform = 'scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 4px 16px #00c3ff66';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 2px 12px #00c3ff44';
+            }}
+          >
+            Submit
+          </button>
         </div>
       </div>
-      <div className="grid">
+      <div className="emotions-grid" style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '1rem',
+        marginTop: '1.5rem',
+        '@media (max-width: 575.98px)': {
+          gridTemplateColumns: '1fr',
+          gap: '0.75rem'
+        }
+      }}>
         {emotionOptions.map(opt => (
-          <div className="emotion-box" id={opt.value} key={opt.value}>
-            <h3><img src={opt.img} alt={opt.label} height={50} /> {opt.label}</h3>
-            <div className="scroll-container">
-              <div className="scroll-track thoughts">
-                {thoughts[opt.value]?.map((thought, idx) => (
-                  <div className={`thought-bubble ${opt.value}`} key={idx}>
-                    <div className="bubble-text">{thought.text}</div>
-                    <div className="meta">
-                      <span className="name">– {thought.name}</span>
-                      <span className="timestamp">{thought.timestamp}</span>
-                    </div>
-                    <div className="like-count">❤️ {thought.likes}</div>
+          <div 
+            className="emotion-card" 
+            key={opt.value}
+            style={{
+              background: theme === 'light' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.08)',
+              borderRadius: '0.75rem',
+              padding: '1rem',
+              border: `1px solid ${theme === 'light' ? '#ddd' : '#5b5ba6'}`,
+              backdropFilter: 'blur(8px)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseOver={e => {
+              e.currentTarget.style.background = theme === 'light' ? 'rgba(255, 255, 255, 1)' : 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 195, 255, 0.2)';
+            }}
+            onMouseOut={e => {
+              e.currentTarget.style.background = theme === 'light' ? 'rgba(255, 255, 255, 0.9)' : 'rgba(255, 255, 255, 0.08)';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            <h3 style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+              fontSize: '1rem',
+              fontWeight: '600',
+              color: theme === 'light' ? '#333' : '#fff',
+              margin: '0 0 0.75rem 0'
+            }}>
+              <img src={opt.img} alt={opt.label} style={{ width: '24px', height: '24px' }} /> 
+              {opt.label}
+            </h3>
+            <div className="thoughts-container" style={{
+              maxHeight: '200px',
+              overflowY: 'auto'
+            }}>
+              {thoughts[opt.value]?.map((thought, idx) => (
+                <div 
+                  className={`thought-item`} 
+                  key={idx}
+                  style={{
+                    background: `linear-gradient(135deg, ${colorMap[opt.value]} 0%, ${colorMap[opt.value]}dd 100%)`,
+                    borderRadius: '0.5rem',
+                    padding: '0.75rem',
+                    marginBottom: '0.5rem',
+                    color: '#333',
+                    fontSize: '0.85rem',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+                    transition: 'transform 0.2s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseOver={e => e.currentTarget.style.transform = 'scale(1.02)'}
+                  onMouseOut={e => e.currentTarget.style.transform = 'scale(1)'}
+                >
+                  <div className="thought-text" style={{ fontWeight: '500', marginBottom: '0.25rem' }}>
+                    {thought.text}
                   </div>
-                ))}
-              </div>
+                  <div className="thought-meta" style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '0.75rem',
+                    opacity: 0.7
+                  }}>
+                    <span>– {thought.name}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                      <span>{thought.timestamp}</span>
+                      <span>❤️ {thought.likes}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         ))}
+        </div>
       </div>
-      </div>
-    </div>
   );
 }
 
