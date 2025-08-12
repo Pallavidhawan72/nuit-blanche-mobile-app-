@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/nuit-blanche-mobile-app-/static/css/main.a3f00042.css",
-    "main.js": "/nuit-blanche-mobile-app-/static/js/main.5d5a6ce1.js",
+    "main.css": "/nuit-blanche-mobile-app-/static/css/main.9ddea356.css",
+    "main.js": "/nuit-blanche-mobile-app-/static/js/main.af4b63ad.js",
     "static/js/488.9b532556.chunk.js": "/nuit-blanche-mobile-app-/static/js/488.9b532556.chunk.js",
     "service-worker.js": "/nuit-blanche-mobile-app-/service-worker.js",
-    "static/media/logo.svg": "/nuit-blanche-mobile-app-/static/media/logo.103b5fa18196d5665a7e12318285c916.svg",
+    "static/media/logo.svg": "/nuit-blanche-mobile-app-/static/media/logo.2d27ead7c10f774c5306bcf3c257a728.svg",
     "index.html": "/nuit-blanche-mobile-app-/index.html",
-    "main.a3f00042.css.map": "/nuit-blanche-mobile-app-/static/css/main.a3f00042.css.map",
-    "main.5d5a6ce1.js.map": "/nuit-blanche-mobile-app-/static/js/main.5d5a6ce1.js.map",
+    "main.9ddea356.css.map": "/nuit-blanche-mobile-app-/static/css/main.9ddea356.css.map",
+    "main.af4b63ad.js.map": "/nuit-blanche-mobile-app-/static/js/main.af4b63ad.js.map",
     "488.9b532556.chunk.js.map": "/nuit-blanche-mobile-app-/static/js/488.9b532556.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a3f00042.css",
-    "static/js/main.5d5a6ce1.js"
+    "static/css/main.9ddea356.css",
+    "static/js/main.af4b63ad.js"
   ]
 }
