@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { FaBars, FaUserCircle } from 'react-icons/fa';
 import logo from './logo.svg';
 
@@ -57,9 +57,6 @@ const exhibitsByEmotion = {
 
 function EmotionExhibitsPage({ theme, openSidebar, openProfile, isLoggedIn }) {
   const { emotionName } = useParams();
-  const navigate = useNavigate();
-
-  // Remove automatic redirect. Add button for user action below.
   const exhibits = exhibitsByEmotion[emotionName?.toUpperCase()] || [
     'Exhibit 1',
     'Exhibit 2',
@@ -151,26 +148,9 @@ function EmotionExhibitsPage({ theme, openSidebar, openProfile, isLoggedIn }) {
             </div>
           </div>
         </div>
-        <div style={{ textAlign: 'center', margin: '2rem 0' }}>
-          <button
-            style={{
-              background: currentEmotionColor,
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '1rem 2rem',
-              fontSize: '1.2rem',
-              cursor: 'pointer',
-              boxShadow: `0 2px 8px ${currentEmotionColor}44`
-            }}
-            onClick={() => navigate('/share-thoughts')}
-          >
-            Share Your Thoughts
-          </button>
-        </div>
       </div>
     </div>
   );
 }
 
-export default EmotionExhibitsPage;
+export default EmotionExhibitsPage; 
