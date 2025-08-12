@@ -6,6 +6,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
 import logo from './logo.svg';
 import EmotionExhibitsPage from './EmotionExhibitsPage';
+import ShareThoughtsPage from './ShareThoughtsPage';
 
 const steps = [
   { title: 'Choose Your Emotion', icon: <FaRegSmile /> },
@@ -392,6 +393,7 @@ function App() {
           <Route path="/" element={<LandingPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
           <Route path="/emotion" element={<EmotionSelectPage theme={theme} setTheme={setTheme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
           <Route path="/emotion/:emotionName" element={<EmotionExhibitsPage theme={theme} openSidebar={() => setSidebarOpen(true)} openProfile={() => setProfileOpen(true)} isLoggedIn={isLoggedIn} />} />
+          <Route path="/share-thoughts" element={<ShareThoughtsPage theme={theme} setTheme={setTheme} sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />} />
         </Routes>
       </Router>
     </div>
