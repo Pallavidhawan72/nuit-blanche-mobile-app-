@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles.css';
+import './App.css';
 
 const emotionOptions = [
   { value: 'joy', label: 'Joy', img: process.env.PUBLIC_URL + '/images/joy.png' },
